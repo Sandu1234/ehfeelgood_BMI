@@ -49,6 +49,11 @@ const elGuidanceList = document.getElementById("guidanceList");
 const elBtnPrint = document.getElementById("btnPrint");
 const elBtnEdit = document.getElementById("btnEdit");
 
+// Footer image element (so we can swap to campaign.png only for PDF)
+const footerImg = document.getElementById("footerImg");
+const SCREEN_FOOTER_SRC = "campaign.jpg";
+const PRINT_FOOTER_SRC = "campaign.png";
+
 // ======= Helpers =======
 function showError(msg) {
   elError.textContent = msg;
@@ -125,6 +130,27 @@ function sanitizeName(input) {
   return input.trim().replace(/\s+/g, " ");
 }
 
+// ======= Print helpers: swap footer image to campaign.png only for PDF =======
+function setFooterForPrint() {
+  if (footerImg) footerImg.src = PRINT_FOOTER_SRC;
+}
+function resetFooterAfterPrint() {
+  if (footerImg) footerImg.src = SCREEN_FOOTER_SRC;
+}
+
+// Most browsers support these events
+window.addEventListener("beforeprint", setFooterForPrint);
+window.addEventListener("afterprint", resetFooterAfterPrint);
+
+// Fallback for some browsers where beforeprint/afterprint are unreliable
+const mq = window.matchMedia && window.matchMedia("print");
+if (mq && mq.addEventListener) {
+  mq.addEventListener("change", (e) => {
+    if (e.matches) setFooterForPrint();
+    else resetFooterAfterPrint();
+  });
+}
+
 // ======= Events =======
 elBtnCalc.addEventListener("click", () => {
   clearError();
@@ -190,5 +216,8 @@ elBtnPrint.addEventListener("click", () => {
     return;
   }
   clearError();
+
+  // Ensure footer image switches before print dialog opens
+  setFooterForPrint();
   window.print();
 });

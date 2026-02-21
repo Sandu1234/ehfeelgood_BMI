@@ -30,7 +30,7 @@ body{
 .app{
   max-width: 540px;
   margin: 0 auto;
-  padding: 16px 14px 0; /* no extra bottom padding - footer image is separate */
+  padding: 16px 14px 0;
 }
 
 .top{
@@ -56,8 +56,6 @@ body{
   border-radius: var(--radius);
   background: var(--soft);
   border: 1px solid var(--line);
-
-  /* create a simple brand bar like the campaign */
   overflow: hidden;
 }
 
@@ -258,14 +256,39 @@ li{
   display: block;
 }
 
-/* Print/PDF (Save as PDF) */
+/* =========================
+   PRINT / SAVE AS PDF ONLY
+   ========================= */
+
+/* Remove default print margins that often create blank extra pages */
+@page{
+  size: auto;
+  margin: 0;
+}
+
 @media print {
-  body{
-    background: #ffffff !important;
-    color: #000000 !important;
+  /* Force background colors to print */
+  *{
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Hide input section during print */
+  html, body{
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    /* PDF background should be teal */
+    background: var(--bg) !important;
+  }
+
+  /* Browser header/footer (URL/date/page) cannot be removed by code.
+     You MUST disable it in print dialog:
+     Chrome: More settings -> Headers and footers -> OFF
+     Safari: Show Details -> uncheck Headers & Footers
+  */
+
+  /* Hide the input section during print */
   .top,
   .formArea,
   .noPrint{
@@ -275,48 +298,85 @@ li{
   /* Print only results + footer image */
   .app{
     max-width: 900px;
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
   }
 
+  /* Make the sheet blend into teal background */
   .sheet{
-    border: 1px solid #dddddd !important;
-    background: #ffffff !important;
+    border: none !important;
+    background: transparent !important;
     border-radius: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
   }
 
   .sheet::before{
-    background: #000000 !important;
-    height: 0 !important;
+    display: none !important;
   }
 
+  /* Give content padding while keeping page margin = 0 */
   .resultArea{
-    padding: 18px !important;
+    padding: 20px 18px 12px !important;
+    background: transparent !important;
   }
 
+  /* Make tiles readable on teal */
   .kv{
-    background: #ffffff !important;
-    border: 1px solid #dddddd !important;
+    background: rgba(0,0,0,0.18) !important;
+    border: 1px solid rgba(255,255,255,0.22) !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .k{
-    color: #333333 !important;
+    color: rgba(255,255,255,0.85) !important;
   }
 
-  .v, ul, li, .disclaimer{
-    color: #000000 !important;
+  .v{
+    color: #ffffff !important;
   }
 
+  ul, li{
+    color: rgba(255,255,255,0.95) !important;
+  }
+
+  .disclaimer{
+    color: rgba(255,255,255,0.80) !important;
+  }
+
+  /* BMI badge stays brand-y on teal */
   .bmiBadge{
-    background: #ffffff !important;
-    border: 1px solid #dddddd !important;
+    background: rgba(241,216,106,0.18) !important;
+    border: 1px solid rgba(241,216,106,0.48) !important;
   }
 
   .bmiBadgeVal{
-    color: #000000 !important;
+    color: #ffffff !important;
   }
 
-  /* Footer image stays full width in PDF */
+  /* Footer banner: full width, no border, avoid page break */
   .footerBanner{
-    margin-top: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .footerImg{
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+
+    /* Prevent it from forcing an extra blank page */
+    max-height: 34vh !important;
+    object-fit: contain !important;
   }
 }
