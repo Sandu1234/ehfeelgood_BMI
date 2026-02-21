@@ -1,0 +1,322 @@
+:root{
+  /* Use simple solid black page */
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.72);
+
+  /* Brand colors inspired by the banner (teal / magenta / yellow) */
+  --teal: #10b7b1;
+  --magenta: #b31c78;
+  --yellow: #f1d86a;
+
+  --line: rgba(255,255,255,0.14);
+  --soft: rgba(255,255,255,0.06);
+  --soft2: rgba(255,255,255,0.10);
+
+  --radius: 18px;
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Mobile-first wrapper */
+.app{
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 16px 14px 0; /* no extra bottom padding - footer image is separate */
+}
+
+.top{
+  padding: 10px 4px 10px;
+}
+
+.title{
+  margin: 0 0 6px;
+  font-size: 24px;
+  letter-spacing: 0.2px;
+}
+
+.sub{
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ONE PAGE SHEET (inputs + results feel connected) */
+.sheet{
+  margin-top: 12px;
+  border-radius: var(--radius);
+  background: var(--soft);
+  border: 1px solid var(--line);
+
+  /* create a simple brand bar like the campaign */
+  overflow: hidden;
+}
+
+.sheet::before{
+  content: "";
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg, var(--teal), var(--yellow), var(--magenta));
+}
+
+/* Form + results share same container */
+.formArea{
+  padding: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.field{ margin-bottom: 12px; }
+
+label{
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.82);
+}
+
+input{
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.35);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus{
+  border-color: rgba(16,183,177,0.85);
+  box-shadow: 0 0 0 4px rgba(16,183,177,0.18);
+}
+
+/* Buttons */
+.actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn{
+  width: 100%;
+  border-radius: 14px;
+  padding: 14px 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-weight: 900;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn.primary{
+  border-color: rgba(16,183,177,0.65);
+  background: rgba(16,183,177,0.18);
+}
+
+.btn.ghost{
+  border-color: rgba(179,28,120,0.40);
+  background: rgba(179,28,120,0.14);
+}
+
+/* Error */
+.error{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  display: none;
+
+  background: rgba(179,28,120,0.22);
+  border: 1px solid rgba(179,28,120,0.42);
+  color: #ffe1eb;
+}
+
+.hidden{ display: none; }
+
+/* Result area - same page container */
+.resultArea{
+  padding: 14px;
+}
+
+.resultHeader{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.resultTitle h2{
+  margin: 0;
+  font-size: 18px;
+}
+.resultTitle p{
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bmiBadge{
+  min-width: 86px;
+  text-align: center;
+  border-radius: 16px;
+  border: 1px solid rgba(241,216,106,0.38);
+  background: rgba(241,216,106,0.14);
+  padding: 10px 10px;
+}
+
+.bmiBadgeTop{
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 4px;
+}
+
+.bmiBadgeVal{
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--yellow);
+}
+
+.kvGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.kv{
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.28);
+}
+
+.kvWide{ grid-column: 1 / -1; }
+
+.k{
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 6px;
+}
+
+.v{
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+/* Guidance */
+.guide{
+  margin-top: 12px;
+}
+
+.guide h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+ul{
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(255,255,255,0.92);
+}
+li{
+  margin: 8px 0;
+  line-height: 1.35;
+}
+
+.disclaimer{
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.62);
+}
+
+/* Footer image is the footer - no stroke/border */
+.footerBanner{
+  margin-top: 14px;
+  width: 100%;
+  background: #000;
+}
+
+.footerImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Print/PDF (Save as PDF) */
+@media print {
+  body{
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide input section during print */
+  .top,
+  .formArea,
+  .noPrint{
+    display: none !important;
+  }
+
+  /* Print only results + footer image */
+  .app{
+    max-width: 900px;
+    padding: 0;
+  }
+
+  .sheet{
+    border: 1px solid #dddddd !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+  }
+
+  .sheet::before{
+    background: #000000 !important;
+    height: 0 !important;
+  }
+
+  .resultArea{
+    padding: 18px !important;
+  }
+
+  .kv{
+    background: #ffffff !important;
+    border: 1px solid #dddddd !important;
+  }
+
+  .k{
+    color: #333333 !important;
+  }
+
+  .v, ul, li, .disclaimer{
+    color: #000000 !important;
+  }
+
+  .bmiBadge{
+    background: #ffffff !important;
+    border: 1px solid #dddddd !important;
+  }
+
+  .bmiBadgeVal{
+    color: #000000 !important;
+  }
+
+  /* Footer image stays full width in PDF */
+  .footerBanner{
+    margin-top: 10px !important;
+  }
+}

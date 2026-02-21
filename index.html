@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMI Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" id="appRoot">
+    <header class="top">
+      <h1 class="title">BMI Calculator</h1>
+      <p class="sub">Enter your details to calculate BMI and view health guidance.</p>
+    </header>
+
+    <!-- SINGLE PAGE SECTION (inputs + results feel connected) -->
+    <section class="sheet">
+      <div class="formArea">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="e.g., Kavindu Perera" maxlength="60" />
+        </div>
+
+        <div class="field">
+          <label for="height">Height (cm)</label>
+          <input id="height" type="number" inputmode="decimal" placeholder="e.g., 170" min="50" max="250" />
+        </div>
+
+        <div class="field">
+          <label for="weight">Weight (kg)</label>
+          <input id="weight" type="number" inputmode="decimal" placeholder="e.g., 65" min="10" max="300" />
+        </div>
+
+        <div class="actions">
+          <button id="btnCalc" class="btn primary" type="button">Calculate BMI</button>
+          <button id="btnReset" class="btn ghost" type="button">Reset</button>
+        </div>
+
+        <div id="error" class="error" role="alert" aria-live="polite"></div>
+      </div>
+
+      <!-- RESULTS (same page, no separation) -->
+      <div id="resultArea" class="resultArea hidden">
+        <div class="resultHeader">
+          <div class="resultTitle">
+            <h2>Your Result</h2>
+            <p>Based on the values you entered</p>
+          </div>
+
+          <div class="bmiBadge">
+            <span class="bmiBadgeTop">BMI</span>
+            <span id="bmiValue" class="bmiBadgeVal">--</span>
+          </div>
+        </div>
+
+        <div class="kvGrid">
+          <div class="kv">
+            <span class="k">Name</span>
+            <span id="userName" class="v">--</span>
+          </div>
+
+          <div class="kv">
+            <span class="k">Height</span>
+            <span id="userHeight" class="v">--</span>
+          </div>
+
+          <div class="kv">
+            <span class="k">Weight</span>
+            <span id="userWeight" class="v">--</span>
+          </div>
+
+          <div class="kv">
+            <span class="k">BMI Range</span>
+            <span id="bmiRange" class="v">--</span>
+          </div>
+
+          <div class="kv kvWide">
+            <span class="k">Category</span>
+            <span id="bmiCategory" class="v">--</span>
+          </div>
+        </div>
+
+        <div class="guide">
+          <h3>Health Guidance</h3>
+          <ul id="guidanceList"></ul>
+        </div>
+
+        <div class="actions resultActions noPrint">
+          <button id="btnPrint" class="btn primary" type="button">Print / Save as PDF</button>
+          <button id="btnEdit" class="btn ghost" type="button">Edit Values</button>
+        </div>
+
+        <p class="disclaimer">
+          Disclaimer: This is general guidance only, not medical advice.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full width footer image (no stroke, no border) -->
+  <footer class="footerBanner">
+    <img src="campaign.jpg" alt="Campaign banner" class="footerImg" />
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
